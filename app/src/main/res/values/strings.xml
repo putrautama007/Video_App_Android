@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">Video App</string>
+    <string name="channel_name">Channel Name</string>
+    <string name="channel_image">Channel Image</string>
+    <string name="see_list_playlist">See List Playlist</string>
+</resources>
