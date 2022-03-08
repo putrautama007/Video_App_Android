@@ -6,11 +6,17 @@ pluginManagement {
     }
 }
 dependencyResolutionManagement {
-    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositoriesMode.set(RepositoriesMode.PREFER_PROJECT)
     repositories {
         google()
         mavenCentral()
     }
 }
 rootProject.name = "Video App"
-include ':app'
+// Include the host app project.
+include ':app'                                    // assumed existing content
+setBinding(new Binding([gradle: this]))                                // new
+evaluate(new File(                                                     // new
+        settingsDir.parentFile,                                              // new
+        'video_app_flutter/.android/include_flutter.groovy'                         // new
+))                                                                     // new
