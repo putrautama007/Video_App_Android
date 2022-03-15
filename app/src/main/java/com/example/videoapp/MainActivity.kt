@@ -9,6 +9,7 @@ import com.example.videoapp.databinding.ActivityMainBinding
 import com.example.videoapp.model.ChannelModel
 import com.example.videoapp.model.ItemsItem
 import com.example.videoapp.service.ApiConfig
+import io.flutter.embedding.android.FlutterActivity
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -16,6 +17,7 @@ import retrofit2.Response
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
+    private lateinit var playlistId: String
 
     companion object {
         private const val CHANNEL_ID = "UCbc1RY0McnikiEMD8Box5Ig"
@@ -28,11 +30,18 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         loadChannel()
+
+        binding.btnSeePlaylist.setOnClickListener {
+            startActivity(
+                FlutterActivity.NewEngineIntentBuilder(FlutterApplication::class.java)
+                    .build(this).putExtra("playlistId", playlistId)
+            )
+        }
     }
 
     private fun loadChannel() {
         showLoading(true)
-        val client = ApiConfig.getApiService().getChannel(CHANNEL_ID,API_KEY)
+        val client = ApiConfig.getApiService().getChannel(CHANNEL_ID, API_KEY)
         client.enqueue(object : Callback<ChannelModel> {
             override fun onResponse(
                 call: Call<ChannelModel>,
@@ -44,10 +53,11 @@ class MainActivity : AppCompatActivity() {
                     if (responseBody != null) {
                         setRestaurantData(responseBody.items[0])
                     }
-                }else{
+                } else {
                     Log.e("TAG", "onFailure: ${response.message()}")
                 }
             }
+
             override fun onFailure(call: Call<ChannelModel>, t: Throwable) {
                 showLoading(false)
                 Log.e("TAG", "onFailure: ${t.message}")
@@ -65,6 +75,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun setRestaurantData(item: ItemsItem) {
         binding.tvChannelName.text = item.snippet.title
+        playlistId = item.contentDetails.relatedPlaylists.uploads
         Glide.with(this@MainActivity)
             .load(item.snippet.thumbnails.medium.url)
             .into(binding.ivChannel)
