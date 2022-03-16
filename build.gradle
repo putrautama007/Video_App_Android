@@ -10,6 +10,8 @@ task clean(type: Delete) {
 }
 
 allprojects {
+    String storageUrl = System.env.FLUTTER_STORAGE_BASE_URL ?: "https://storage.googleapis.com"
+
     repositories {
         google()
         jcenter()
@@ -18,7 +20,7 @@ allprojects {
                 url '/Users/putrautama/Documents/Flutter/AddToApp/video_app_flutter/build/host/outputs/repo'
             }
             maven {
-                url "https://storage.googleapis.com/download.flutter.io"
+                url "$storageUrl/download.flutter.io"
             }
         }
 
