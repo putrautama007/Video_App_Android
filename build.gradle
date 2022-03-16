@@ -13,5 +13,14 @@ allprojects {
     repositories {
         google()
         jcenter()
+        repositories {
+            maven {
+                url '/Users/putrautama/Documents/Flutter/AddToApp/video_app_flutter/build/host/outputs/repo'
+            }
+            maven {
+                url "https://storage.googleapis.com/download.flutter.io"
+            }
+        }
+
     }
 }

@@ -47,4 +47,6 @@ dependencies {
     implementation 'com.github.bumptech.glide:glide:4.13.0'
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
     implementation "com.squareup.retrofit2:converter-gson:2.9.0"
+    debugImplementation 'com.video_app.video_app_flutter:flutter_debug:1.0'
+    releaseImplementation 'com.video_app.video_app_flutter:flutter_release:1.0'
 }
