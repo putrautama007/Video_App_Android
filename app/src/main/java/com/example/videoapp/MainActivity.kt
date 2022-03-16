@@ -17,7 +17,7 @@ import retrofit2.Response
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
-    private lateinit var playlistId: String
+    private lateinit var searchQuery: String
 
     companion object {
         private const val CHANNEL_ID = "UCbc1RY0McnikiEMD8Box5Ig"
@@ -34,7 +34,7 @@ class MainActivity : AppCompatActivity() {
         binding.btnSeePlaylist.setOnClickListener {
             startActivity(
                 FlutterActivity.NewEngineIntentBuilder(FlutterApplication::class.java)
-                    .build(this).putExtra("playlistId", playlistId)
+                    .build(this).putExtra("search", searchQuery)
             )
         }
     }
@@ -75,7 +75,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun setRestaurantData(item: ItemsItem) {
         binding.tvChannelName.text = item.snippet.title
-        playlistId = item.contentDetails.relatedPlaylists.uploads
+        searchQuery = "ruangguru"
         Glide.with(this@MainActivity)
             .load(item.snippet.thumbnails.medium.url)
             .into(binding.ivChannel)
