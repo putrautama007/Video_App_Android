@@ -13,10 +13,4 @@ dependencyResolutionManagement {
     }
 }
 rootProject.name = "Video App"
-// Include the host app project.
-include ':app'                                    // assumed existing content
-setBinding(new Binding([gradle: this]))                                // new
-evaluate(new File(                                                     // new
-        settingsDir.parentFile,                                              // new
-        'video_app_flutter/.android/include_flutter.groovy'                         // new
-))                                                                     // new
+include ':app'
